@@ -8,6 +8,7 @@ class IagoCpu: public Cpu{
   int operationCounter = 0;
   int operation = 0;      
   int countDigits = 0;
+  int count_equal = 0;
   int memory_disc = 0;
   int control_mrc = 0;
   int is_integer = 0;
@@ -37,8 +38,8 @@ class IagoCpu: public Cpu{
 
   char digitToChar(Digit );
   float charToFloat(char* );
+  void floatToChar(float);
   void convertResultToDigit(float );
-  void FloatToChar(float );
 
   public:
     void receiveDigit(Digit );

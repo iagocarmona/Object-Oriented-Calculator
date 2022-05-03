@@ -7,6 +7,7 @@
 
 
   void IagoCpu::receiveDigit(Digit digit){  
+    this->count_equal = 0;
     char digitChar = this->digitToChar(digit);
 
     if(this->countDigits < 8){
@@ -21,48 +22,31 @@
     this->countDigits++;
   }
 
-  //******************************************************
-  //                 RECEIVE OPERATION                   *
-  //******************************************************
-
   void IagoCpu::receiveOperation(Operation op){
     this->operationCounter++;
     this->operation = 1;
     std::cout << "\n\n";
-
     if(op == SUBTRACTION && this->operationCounter > 1){
       this->display?this->display->setSignal(NEGATIVE): void();
     }
-
     if(op == SUBTRACTION && this->operationCounter == 1){
       this->display?this->display->setSignal(NEGATIVE): void();
       this->operation = 0;
     }
-
     if(this->countDigits != 0){
       this->store_operation = op;
     }
-
     this->operation1 = this->charToFloat(this->firstOperation);
-    // std::cout << this->operation1 << '\nOperation 1';
     this->countDigits = 0;
     this->decimal_separator = false;
-
     if(this->control_operation == false){
         this->control_operation = true;
     }
-
     this->receive_operation = op;
     if(op == SUBTRACTION){
       this->signal = NEGATIVE;
     }
   }
-
-
-  //******************************************************
-  //                 RECEIVE CONTROL                     *
-  //******************************************************
-
   void IagoCpu::receiveControl(Control control){
     switch (control){
       case CLEAR: 
@@ -176,48 +160,50 @@
         break;
 
       case EQUAL:
+          std::cout << "\n";
+          this->operation2 = this->charToFloat(this->secondOperation);
+          if(this->count_equal == 0){
+            this->memo = this->operation2;
+          }
+          this->count_equal++;
           this->control_equal = true;
+
           if (this->control_equal == true){
-            std::cout << "\n";
-            // this->receive_operation = this->store_operation;
-            this->operation2 = this->charToFloat(this->secondOperation);
-            if (this->memo == 0)
-              this->memo = this->operation2;
             switch (this->receive_operation)
             {
             case ADDITION:
               this->operation1 = this->operation1 + (this->memo);
-              // this->operation2 = 0;
+              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case SUBTRACTION:
               this->operation1 = this->operation1 - (this->memo);
-              // this->operation2 = 0;
+              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case DIVISION:
               this->operation1 = this->operation1 / this->memo;
-              // this->operation2 = 0;
+              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case MULTIPLICATION:
               this->operation1 = this->operation1 * this->memo;
-              // this->operation2 = 0;
+              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case SQUARE_ROOT:
               this->operation1 = sqrt(this->operation1);
-              // this->operation2 = 0;
+              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case PERCENTAGE:
               this->operation1 = this->operation1 / 100;
-              // this->operation2 = 0;
+              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
             
@@ -225,8 +211,9 @@
               break;
 
             }}
-          this->operation2 = 0;
           this->control_equal = false;
+          this->operation2 = 0;
+          
         this->convertResultToDigit(this->operation1);
         break;
 
@@ -269,9 +256,13 @@
     return num;
   }
 
-  void IagoCpu::FloatToChar(float operation){}
+  void IagoCpu::floatToChar(float operation){
+    std::sprintf(this->firstOperation,"%.3f", operation);
+  }
 
   void IagoCpu::convertResultToDigit(float num){
+    this->floatToChar(num);
+    
     this->countDigits = 0;
     std::cout << "\n";
     if(num < 0){

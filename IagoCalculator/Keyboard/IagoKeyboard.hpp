@@ -10,8 +10,3 @@ class IagoKeyboard: public Keyboard{
       void receiveOperation(Operation );
       void receiveControl(Control );
 };
-
-// class IagoKey:public Key{
-//   public:
-//     void press();
-// };

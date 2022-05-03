@@ -68,21 +68,21 @@ int main() {
 
   //Terminal Display.
 
-  key6.press();
+  key5.press();
   
   keyDivision.press();
 
   key2.press();
 
   keyEqual.press();
-  keyEqual.press();
-  
-  keyAddition.press();
 
-  key2.press();
+  keyMultiplication.press();
+
+  key4.press();
   
   keyEqual.press();
 
+  keyEqual.press();
   std::cout << "\n";
 
   return 1;
