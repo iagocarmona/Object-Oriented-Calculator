@@ -28,6 +28,7 @@ class IagoCpu: public Cpu{
   //BOOL
   bool decimal_separator = false;
   bool control_operation;
+  bool control_equal = false;
 
   Operation store_operation;
   Signal signal;
@@ -37,6 +38,7 @@ class IagoCpu: public Cpu{
   char digitToChar(Digit );
   float charToFloat(char* );
   void convertResultToDigit(float );
+  void FloatToChar(float );
 
   public:
     void receiveDigit(Digit );
