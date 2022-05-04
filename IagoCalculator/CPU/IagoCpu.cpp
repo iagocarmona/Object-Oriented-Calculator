@@ -6,6 +6,10 @@
 #include <cmath>
 
 
+//******************************************************************
+//                        RECEIVE DIGIT                            *
+//******************************************************************
+
   void IagoCpu::receiveDigit(Digit digit){  
     this->count_equal = 0;
     char digitChar = this->digitToChar(digit);
@@ -21,6 +25,10 @@
     this->display?this->display->add(digit):void();
     this->countDigits++;
   }
+
+//******************************************************************
+//                        RECEIVE OPERATION                        *
+//******************************************************************
 
   void IagoCpu::receiveOperation(Operation op){
     this->operationCounter++;
@@ -47,6 +55,11 @@
       this->signal = NEGATIVE;
     }
   }
+
+//******************************************************************
+//                        RECEIVE CONTROL                          *
+//******************************************************************
+
   void IagoCpu::receiveControl(Control control){
     switch (control){
       case CLEAR: 
@@ -220,6 +233,10 @@
     }
   }
 
+//******************************************************************
+//                     CONVERTING DIGIT TO CHAR                    *
+//******************************************************************
+
   char IagoCpu::digitToChar(Digit digit){
     switch(digit){
       case ZERO: this->digit = '0';
@@ -246,6 +263,10 @@
     return this->digit;
   }
 
+//******************************************************************
+//                   CONVERTING CHAR TO FLOAT                      *
+//******************************************************************
+
   float IagoCpu::charToFloat(char* operation){
     float num;
     num = atof(operation); 
@@ -256,9 +277,17 @@
     return num;
   }
 
+//******************************************************************
+//                     CONVERTING FLOAT TO CHAR                    *
+//******************************************************************
+
   void IagoCpu::floatToChar(float operation){
     std::sprintf(this->firstOperation,"%.3f", operation);
   }
+
+//******************************************************************
+//              CONVERTING RESULT IN FLOAT TO DIGIT                *
+//******************************************************************
 
   void IagoCpu::convertResultToDigit(float num){
     this->floatToChar(num);

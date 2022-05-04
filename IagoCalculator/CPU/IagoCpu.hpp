@@ -35,7 +35,7 @@ class IagoCpu: public Cpu{
   Signal signal;
   Operation receive_operation;
 
-
+  //FUNÇÕES AUXILIARES
   char digitToChar(Digit );
   float charToFloat(char* );
   void floatToChar(float);
