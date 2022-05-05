@@ -6,6 +6,30 @@
 #include <cmath>
 
 
+IagoCpu::IagoCpu(){
+  this->countDecimalSeparator = 0;
+  this->is_true_DecimalSeparator = 0;
+  this->operationCounter = 0;
+  this->operation = 0;      
+  this->countDigits = 0;
+  this->count_equal = 0;
+  this->memory_disc = 0;
+  this->control_mrc = 0;
+  this->is_integer = 0;
+  
+  //FLOAT
+  this->operation1 = 0.0;
+  this->operation2 = 0.0;
+  this->memo = 0.0;
+  this->memory = 0.0;
+  this->memo1 = 0.0;
+  this->memo2 = 0.0;
+  
+  //BOOL
+  this->decimal_separator = false;
+  this->control_equal = false;
+}
+
 //******************************************************************
 //                        RECEIVE DIGIT                            *
 //******************************************************************
@@ -13,6 +37,10 @@
   void IagoCpu::receiveDigit(Digit digit){  
     this->count_equal = 0;
     char digitChar = this->digitToChar(digit);
+
+    if(this->countDigits == 0){
+      this->display?this->display->clear() : void();
+    }
 
     if(this->countDigits < 8){
       if(this->operation == 0){
@@ -94,17 +122,21 @@
         break;
 
       case DECIMAL_SEPARATOR:
-        is_true_DecimalSeparator += 1;
-        if(this->decimal_separator == false){
-          if(this->operation == 0){
-            this->firstOperation[this->countDigits] = '.';
-          } else {
-            this->secondOperation[this->countDigits] = '.';
+        this->is_true_DecimalSeparator += 1;
+
+        if(this->countDigits == 0){
+          if(this->decimal_separator == false){
+            if(this->operation == 0){
+              this->firstOperation[this->countDigits] = '.';
+            } else {
+              this->secondOperation[this->countDigits] = '.';
+            }
+            std::cout << ".";
+            this->countDigits++;
+            this->decimal_separator = true;
           }
-          std::cout << ".";
-          this->countDigits++;
-          this->decimal_separator = true;
         }
+
         break;
 
       case MEMORY_READ_CLEAR: 

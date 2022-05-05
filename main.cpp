@@ -67,6 +67,7 @@ int main() {
   keyboard.addKey(&keyEqual);
 
   //Terminal Display.
+  keyDecimalSeparator.press();
 
   key5.press();
   
@@ -84,7 +85,6 @@ int main() {
 
   keyEqual.press();
 
-  
   std::cout << "\n";
 
   return 1;

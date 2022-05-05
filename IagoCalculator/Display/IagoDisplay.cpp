@@ -1,6 +1,10 @@
 #include <iostream>
 #include "IagoDisplay.hpp"
 
+IagoDisplay::IagoDisplay(){
+  this->add(ZERO);
+}
+
 //******************************************************************
 //                   ADDING A DIGIT ON DISPLAY                     *
 //******************************************************************
@@ -57,9 +61,5 @@
     std::cout << "\n";
     std::cout << "\n";
     std::cout << "\n";
-    std::cout << "\n";
-    std::cout << "\n";
-    std::cout << "\n";
-    std::cout << "\n";
-    std::cout << "\n";
+    // system("clear");
   }
