@@ -68,31 +68,46 @@ int main() {
 
   //Terminal Display.
 
-  // keyDecimalSeparator.press();
-
-  key5.press();
-  keyDivision.press();
   key2.press();
-  keyEqual.press();
-  keyMultiplication.press();
-  key4.press();
-  keyEqual.press();
-  keyEqual.press();
 
-  keyClear.press();
-
-  keyDecimalSeparator.press();
-  key5.press();
   keyAddition.press();
-  key1.press();
+
+  key3.press();
+
   keyEqual.press();
 
-  keyClear.press();
-
-  key5.press();
-  keyDivision.press();
-  keyDecimalSeparator.press();
+  keySubtraction.press();
   key2.press();
+
+  keyEqual.press();
+
+  keyMultiplication.press();
+
+  key7.press();
+
+  keyEqual.press();
+
+  keyDivision.press();
+
+  key2.press();
+
+  keyEqual.press();
+
+  keyAddition.press();
+
+  key2.press();
+  keyDecimalSeparator.press();
+  key4.press();
+
+  keyEqual.press();
+
+  keyAddition.press();
+
+  keyDecimalSeparator.press();
+  key5.press();
+
+  keyEqual.press();
+
   keyEqual.press();
 
   std::cout << "\n";

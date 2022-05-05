@@ -62,23 +62,30 @@ IagoCpu::IagoCpu(){
     this->operationCounter++;
     this->operation = 1;
     std::cout << "\n\n";
+
     if(op == SUBTRACTION && this->operationCounter > 1){
       this->display?this->display->setSignal(NEGATIVE): void();
     }
+
     if(op == SUBTRACTION && this->operationCounter == 1){
       this->display?this->display->setSignal(NEGATIVE): void();
       this->operation = 0;
     }
-    if(this->countDigits != 0){
+
+    if(this->countDigits != 0 || op != SUBTRACTION){
       this->store_operation = op;
     }
+
     this->operation1 = this->charToFloat(this->firstOperation);
     this->countDigits = 0;
     this->decimal_separator = false;
+
     if(this->control_operation == false){
         this->control_operation = true;
     }
+
     this->receive_operation = op;
+
     if(op == SUBTRACTION){
       this->signal = NEGATIVE;
     }
@@ -126,7 +133,7 @@ IagoCpu::IagoCpu(){
       case DECIMAL_SEPARATOR:
         this->is_true_DecimalSeparator += 1;
 
-        if(this->countDigits == 0){
+        if(this->countDigits == 0 || this->operation < 2){
           if(this->countDigits == 0 && this->operation == 1){
             this->display?this->display->add(ZERO): void();
           }
@@ -215,6 +222,9 @@ IagoCpu::IagoCpu(){
           if(this->count_equal == 0){
             this->memo = this->operation2;
           }
+
+          this->receive_operation = this->store_operation;
+
           this->count_equal++;
           this->control_equal = true;
 
@@ -223,37 +233,31 @@ IagoCpu::IagoCpu(){
             {
             case ADDITION:
               this->operation1 = this->operation1 + (this->memo);
-              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case SUBTRACTION:
               this->operation1 = this->operation1 - (this->memo);
-              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case DIVISION:
               this->operation1 = this->operation1 / this->memo;
-              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case MULTIPLICATION:
               this->operation1 = this->operation1 * this->memo;
-              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case SQUARE_ROOT:
               this->operation1 = sqrt(this->operation1);
-              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
 
             case PERCENTAGE:
               this->operation1 = this->operation1 / 100;
-              this->operation2 = 0;
               memset(this->secondOperation, '\0', 9);
               break;
             
