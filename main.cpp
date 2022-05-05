@@ -67,22 +67,32 @@ int main() {
   keyboard.addKey(&keyEqual);
 
   //Terminal Display.
-  keyDecimalSeparator.press();
+
+  // keyDecimalSeparator.press();
 
   key5.press();
-  
   keyDivision.press();
-
   key2.press();
-
   keyEqual.press();
-
   keyMultiplication.press();
-
   key4.press();
-  
+  keyEqual.press();
   keyEqual.press();
 
+  keyClear.press();
+
+  keyDecimalSeparator.press();
+  key5.press();
+  keyAddition.press();
+  key1.press();
+  keyEqual.press();
+
+  keyClear.press();
+
+  key5.press();
+  keyDivision.press();
+  keyDecimalSeparator.press();
+  key2.press();
   keyEqual.press();
 
   std::cout << "\n";

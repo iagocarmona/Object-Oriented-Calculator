@@ -38,7 +38,7 @@ IagoCpu::IagoCpu(){
     this->count_equal = 0;
     char digitChar = this->digitToChar(digit);
 
-    if(this->countDigits == 0){
+    if(this->countDigits == 0 && this->operation == 0){
       this->display?this->display->clear() : void();
     }
 
@@ -93,6 +93,7 @@ IagoCpu::IagoCpu(){
       case CLEAR: 
         this->operation = 0;
         this->display?this->display->clear(): void();
+        this->display?this->display->add(ZERO): void();
         this->countDigits = 0;
         memset(this->firstOperation, '\0', 9);
         memset(this->secondOperation, '\0', 9);
@@ -106,6 +107,7 @@ IagoCpu::IagoCpu(){
 
       case RESET: 
         this->display?this->display->clear(): void();
+        this->display?this->display->add(ZERO): void();
         this->countDigits = 0;
         memset(this->firstOperation, '\0', 9);
         memset(this->secondOperation, '\0', 9);
@@ -125,6 +127,9 @@ IagoCpu::IagoCpu(){
         this->is_true_DecimalSeparator += 1;
 
         if(this->countDigits == 0){
+          if(this->countDigits == 0 && this->operation == 1){
+            this->display?this->display->add(ZERO): void();
+          }
           if(this->decimal_separator == false){
             if(this->operation == 0){
               this->firstOperation[this->countDigits] = '.';
