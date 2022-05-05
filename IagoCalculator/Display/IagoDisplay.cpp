@@ -40,7 +40,7 @@ IagoDisplay::IagoDisplay(){
 //******************************************************************
 
   void IagoDisplay::setSignal(Signal signal){
-    if(NEGATIVE) std::cout << "-"; 
+    if(signal == NEGATIVE) std::cout << "-"; 
   }
 
 //******************************************************************
